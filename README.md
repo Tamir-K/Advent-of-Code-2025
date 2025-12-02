@@ -26,10 +26,10 @@ The repository is organized as follows:
 ```
 advent_of_code_2025/
 │
-├── day_01_part1.py  # Solution for Day 1, Part 1
-├── day_01_part2.py  # Solution for Day 1, Part 2
-├── day_02_part1.py  # Solution for Day 2, Part 1
-├── day_02_part2.py  # Solution for Day 2, Part 2
+├── day1_part1.py  # Solution for Day 1, Part 1
+├── day1_part2.py  # Solution for Day 1, Part 2
+├── day2_part1.py  # Solution for Day 2, Part 1
+├── day2_part2.py  # Solution for Day 2, Part 2
 │
 └── README.md        # This README file
 ```
