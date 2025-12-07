@@ -16,7 +16,6 @@ def main():
     for line in fileinput.input():
         direction = -1 if line[DIRECTION] == LEFT else 1
         distance = int(line[DISTANCE:])
-        print(f"{dial=}, {counter=}, {direction=}, {distance=}")
         for _ in range(distance):
             dial += direction
             if dial > 99:
