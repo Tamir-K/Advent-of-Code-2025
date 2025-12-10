@@ -26,10 +26,10 @@ The repository is organized as follows:
 ```
 advent_of_code_2025/
 │
-├── day1_part1.py  # Solution for Day 1, Part 1
-├── day1_part2.py  # Solution for Day 1, Part 2
-├── day2_part1.py  # Solution for Day 2, Part 1
-├── day2_part2.py  # Solution for Day 2, Part 2
+├── day01_part1.py  # Solution for Day 1, Part 1
+├── day01_part2.py  # Solution for Day 1, Part 2
+├── day02_part1.py  # Solution for Day 2, Part 1
+├── day02_part2.py  # Solution for Day 2, Part 2
 │
 └── README.md        # This README file
 ```
@@ -52,13 +52,13 @@ If you need to install Python, you can download it from [python.org](https://www
 To run a specific day's solution, you can execute the desired Python file. For example, to run the first part of Day 1:
 
 ```bash
-python day1_part1.py input_file
+python day01_part1.py input_file
 ```
 
 You can similarly run the second part with:
 
 ```bash
-python day1_part2.py input_file
+python day01_part2.py input_file
 ```
 
 ## License
