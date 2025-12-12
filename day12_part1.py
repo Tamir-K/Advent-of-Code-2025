@@ -3,6 +3,7 @@
 # Imports
 import fileinput
 from itertools import takewhile, product
+from tqdm import tqdm
 
 # Constants
 AREA_INDICATOR = "x"
@@ -14,6 +15,7 @@ NUM_SHAPES = 6
 
 
 def parse_shape_defs(puzzle):
+    """Get all shape definitions as lists of points"""
     shape_defs = {}
     for _ in range(NUM_SHAPES):
         shape_iterator = list(takewhile(lambda row: row, puzzle))
@@ -27,6 +29,7 @@ def parse_shape_defs(puzzle):
 
 
 def parse_area_def(row):
+    """Get area definition as rank and list of shapes"""
     area_def, *shapes = row.strip().split()
     return area_def.strip(DELIMITER), [
         position for position, count in enumerate(shapes) for _ in range(int(count))
@@ -40,7 +43,7 @@ def rotate_point(point):
 
 
 def get_all_rotations(points):
-    """Generate all four rotations of the given points using yield"""
+    """Generate all four rotations of the given points"""
     current_rotation = points
 
     for _ in range(4):
@@ -51,11 +54,13 @@ def get_all_rotations(points):
         current_rotation = [(x - min_x, y - min_y) for x, y in current_rotation]
 
 
-def in_bounding_box(shape, dim1, dim2):
+def is_in_bounding_box(shape, dim1, dim2):
+    """Check if all of the shape's points are in the bounding box"""
     return all(0 <= x < dim1 and 0 <= y < dim2 for x, y in shape)
 
 
 def can_fit(area_def, shapes, shape_defs):
+    """Check if shapes fit in area using backtracking"""
     dim1, dim2 = [int(dim) for dim in area_def.split(AREA_INDICATOR)]
     area = dim1 * dim2
     total_size = sum(len(shape_defs[shape]) for shape in shapes)
@@ -71,7 +76,7 @@ def can_fit(area_def, shapes, shape_defs):
                 continue
             for rotation in get_all_rotations(shape_defs[shapes[i]]):
                 current_shape = {(x + k, y + j) for x, y in rotation}
-                if current_fill.isdisjoint(current_shape) and in_bounding_box(
+                if current_fill.isdisjoint(current_shape) and is_in_bounding_box(
                     current_shape, dim1, dim2
                 ):
                     if backtrack(i + 1, current_fill | current_shape):
@@ -84,10 +89,7 @@ def can_fit(area_def, shapes, shape_defs):
 def main():
     puzzle = (row.strip() for row in fileinput.input())
     shape_defs = parse_shape_defs(puzzle)
-    final_sum = 0
-    for row in puzzle:
-        area_def, shapes = parse_area_def(row)
-        final_sum += int(can_fit(area_def, shapes, shape_defs))
+    final_sum = sum(can_fit(*parse_area_def(row), shape_defs) for row in puzzle)
     print(final_sum)
 
 
