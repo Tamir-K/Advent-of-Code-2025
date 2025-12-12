@@ -2,7 +2,7 @@
 
 # Imports
 import fileinput
-from itertools import takewhile, chain, product
+from itertools import takewhile, product
 
 # Constants
 AREA_INDICATOR = "x"
