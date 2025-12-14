@@ -3,7 +3,6 @@
 # Imports
 import fileinput
 from itertools import takewhile, product
-from tqdm import tqdm
 
 # Constants
 AREA_INDICATOR = "x"
